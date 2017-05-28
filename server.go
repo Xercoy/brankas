@@ -7,15 +7,17 @@ import (
 )
 
 type Server struct {
-	router    *mux.Router
-	fileStore FileStore
-	authToken string
+	router        *mux.Router
+	fileStore     FileStore
+	authToken     string
+	fileByteLimit int64
 }
 
-func NewServer(fs FileStore, at string) *Server {
+func NewServer(fs FileStore, at string, ful int64) *Server {
 	s := &Server{
-		router:    mux.NewRouter(),
-		authToken: at,
+		router:        mux.NewRouter(),
+		authToken:     at,
+		fileByteLimit: ful,
 	}
 
 	s.buildRoutes()

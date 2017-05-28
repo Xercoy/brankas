@@ -4,8 +4,12 @@ import "net/http"
 
 func (s *Server) buildRoutes() {
 	const (
-		GET = "GET"
+		GET  = "GET"
+		POST = "POST"
 	)
 	// Get to serve upload page
-	s.router.Handle("/", http.HandlerFunc(s.getUploadPageHandler)).Methods(GET)
+	s.router.Handle("/upload", http.HandlerFunc(s.getUploadPageHandler)).Methods(GET)
+
+	// Post images to the upload route
+	s.router.Handle("/upload", http.HandlerFunc(s.postUploadPageHandler)).Methods(POST)
 }
